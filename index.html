@@ -8,10 +8,14 @@
   <div>
     <h2>Calculator</h2>
     <form>
-      1st Number : <input type="number" name="num1" id="num1"></input><br>
-      2nd Number : <input type="number" name="num2" id="num2"></input><br>
-      <input type="button" value="Add" onclick="addNumbers()"></input><br>
-      Result : <input type="number" id="result"/></input>
+      1st Number : <input type="number" name="num1" id="num1"></input> <input type="text" id="bin1"/></input> <br>
+      2nd Number : <input type="number" name="num2" id="num2"></input> <input type="text" id="bin2"/></input> <br>
+      <select id="operator" name="operator">
+        <option value="add">Add</option>
+        <option value="subs">Subtract</option>
+      </select>
+      <input type="button" value="Calculate" onclick="calculate()" /></input><br>
+      Result : <input type="text" id="result"/> <input type="text" id="resultbin"/></input> </input>
     </form>
   </div>
 </body>
