@@ -11,29 +11,36 @@ function findBin(number){
   // Before Rounding
   var float = new Float64Array([number]);
   var bytes = new Uint8Array(float.buffer);
+  var bitwise = [].map.call(bytes, function(b){
+      for(var s = b.toString(2),i = s.length; i <8;i++ ){
+        s = "0" + s;
+      }
+  })
+  bitwise = bitwise.reverse().join("");
+
   var sign = bytes[7]>>7;
   var exponent = ((bytes[7] & 0x7f) << 4 | bytes[6] >> 4) - 0x3ff;
   bytes[7] = 0x3f;
   bytes[6] |= 0xf0;
   var mantissa = float[0];
   // Didnt bias the exponent yet
+  console.log(bitwise);
   console.log(sign+" "+exponent+" "+mantissa);
 
-  // Rounding the number:
-  var mantissaRounded = Math.floor(mantissa * possibleMantissas) / possibleMantissas;
-  var numberRounded = (sign ? -1 : 1) * Math.pow(2, exponent) * mantissaRounded;
+  return {
+    sign: sign,
+    exponent: exponent,
+    mantissa: mantissa,
+    bitwise: bitwise
+  };
+}
 
-  var floatRounded = new Float64Array([numberRounded]);
-  var bytesRounded = new Uint8Array(floatRounded.buffer);
-  var signRounded= bytesRounded[7]>>7;
-  var exponentRounded = ((bytesRounded[7] & 0x7f) << 4 | bytesRounded[6] >> 4) - 0x3ff;
-  bytesRounded[7] = 0x3f;
-  bytesRounded[6] |= 0xf0;
-  var mantissaRounded = floatRounded[0];
-  // Didnt bias the exponent yet
-  console.log(signRounded+" "+exponentRounded+" "+mantissaRounded);
+function roundBin(number){
+  var mantissaRounded = Math.floor(number.mantissa * possibleMantissas) / possibleMantissas;
+  var numberRounded = (number.sign ? -1 : 1) * Math.pow(2, number.exponent) * mantissaRounded;
+  var RoundedBin = findBin(numberRounded);
 
-  return 0;
+  return RoundedBin;
 }
 
 // This is the conversion of bit represented Floating point number to decimal number
@@ -76,7 +83,9 @@ function fadd1(num1,num2) {
   bin1 = findBin(num1);
   bin2 = findBin(num2);
 
-  return fround((fround(num1,bits) + fround(num2,bits)),bits);
+  var sum = roundBin(roundBin(bin1).matissa + roundBin(bin2).mantissa);
+
+  console.log(sum);
 }
 
 function calculate(){
@@ -84,9 +93,7 @@ function calculate(){
   let y = document.getElementById('num2').value;
   // Later add code to get the operator (For now addition)
   var result = fadd1(x,y)
-  document.getElementById('result').value = result
-
-
+  document.getElementById('result').value = result;
 }
 
 /* References:
