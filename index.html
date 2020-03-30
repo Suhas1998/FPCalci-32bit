@@ -8,14 +8,12 @@
   <div>
     <h2>Calculator</h2>
     <form>
-      1st Number : <input type="number" name="num1" id="num1"></input> <input type="text" id="bin1"/></input> <br>
+      1st Number : <input type="number" name="num1" id="num1"></input> <input type="text" maxlength="64" id="bin1"/></input> <br>
       <input type="button" value="Convert to Binary" onclick="toBinary()" /></input><br>
       2nd Number : <input type="number" name="num2" id="num2"></input> <input type="text" maxlength="64" id="bin2"/></input> <br>
-      <!-- <select id="operator" name="operator">
-        <option value="add">Add</option>
-        <option value="subs">Subtract</option>
-      </select> -->
       <input type="button" value="Convert to Decimal" onclick="toDecimal()" /></input><br>
+      Result : <input type="number" name="result" id="result"></input> <input type="text" maxlength="64" id="resultBin"/></input> <br>
+      <input type="button" value="Calculate" onclick="calculate()" /></input>
     </form>
   </div>
 </body>
