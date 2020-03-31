@@ -64,12 +64,12 @@ function findDec(number){
 }
 
 
-function toBinary(){
-  let x = document.getElementById('num1').value;
+function toBinary(num){
+  let x = document.getElementById('num'+num).value;
   // Evaluate the result
-  var result = findBin(x);
+  var result = roundBin(findBin(x));
   // Write the values as output
-  document.getElementById('bin1').value = result;
+  document.getElementById('bin'+num).value = result.value;
 }
 
 function toDecimal(){

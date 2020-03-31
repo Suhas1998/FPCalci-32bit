@@ -35,6 +35,7 @@
         inp1.type = "number";
         inp1.name = "num"+count;
         inp1.id = "num"+count;
+        inp1.setAttribute("onchange", "toBinary("+count+")")
         newField.appendChild(inp1);
         var inp2 = document.createElement('input');
         inp2.type = "text";
@@ -45,7 +46,6 @@
         fieldsdiv.appendChild(newField);
       });
     }
-
   </script>
 </head>
 <body>
@@ -53,7 +53,7 @@
     <h2>Calculator</h2>
     <button id="add">Add Field</button><br>
     <form>
-      Number 1: <input type="number" name="num1" id="num1"></input> <input type="text" maxlength="64" id="bin1"/></input> <br>
+      Number 1: <input type="number" name="num1" id="num1" onchange="toBinary(1)"></input> <input type="text" maxlength="64" id="bin1"/></input> <br>
       <div id="fields">
         <span class="numberField">
           <select id="operator1">
@@ -62,7 +62,7 @@
             <option value="multiply">Multiply</option>
             <option value="divide">Divide</option>
           </select><br>
-          Number 2: <input type="number" name="num2" id="num2"></input> <input type="text" maxlength="64" id="bin2"/></input> <br>
+          Number 2: <input type="number" name="num2" id="num2" onchange="toBinary(2)"></input> <input type="text" maxlength="64" id="bin2"/></input> <br>
         </span>
       </div>
       <input type="button" value="Calculate" onclick="calculate()" /></input><br>
