@@ -15,23 +15,24 @@ function findBin(number){
       for(var s = b.toString(2),i = s.length; i <8;i++ ){
         s = "0" + s;
       }
+      return s;
   })
-  bitwise = bitwise.reverse().join("");
+  bitwise = bitwise.reverse();
+  bitwise = bitwise.join("");
 
   var sign = bytes[7]>>7;
   var exponent = ((bytes[7] & 0x7f) << 4 | bytes[6] >> 4) - 0x3ff;
   bytes[7] = 0x3f;
   bytes[6] |= 0xf0;
   var mantissa = float[0];
-  // Didnt bias the exponent yet
-  console.log(bitwise);
-  console.log(sign+" "+exponent+" "+mantissa);
+  var value = (sign ? -1 : 1) * Math.pow(2,exponent) * mantissa;
 
   return {
     sign: sign,
     exponent: exponent,
     mantissa: mantissa,
-    bitwise: bitwise
+    bitwise: bitwise,
+    value: value
   };
 }
 
@@ -82,16 +83,20 @@ function toDecimal(){
 function fadd1(num1,num2) {
   bin1 = findBin(num1);
   bin2 = findBin(num2);
+  bin1 = roundBin(bin1);
+  bin2 = roundBin(bin2);
+  document.getElementById('bin1').value = bin1.bitwise;
+  document.getElementById('bin2').value = bin1.bitwise;
 
-  var sum = roundBin(roundBin(bin1).matissa + roundBin(bin2).mantissa);
-
-  console.log(sum);
+  var sum = roundBin(findBin(bin1.value+bin2.value));
+  return sum.value;
 }
 
 function calculate(){
   let x = document.getElementById('num1').value;
   let y = document.getElementById('num2').value;
   // Later add code to get the operator (For now addition)
+
   var result = fadd1(x,y)
   document.getElementById('result').value = result;
 }
