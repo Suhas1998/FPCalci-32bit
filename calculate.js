@@ -85,8 +85,6 @@ function evaluate(num1,num2,operator) {
   var bin2 = findBin(num2);
   bin1 = roundBin(bin1);
   bin2 = roundBin(bin2);
-  document.getElementById('bin1').value = bin1.bit64;
-  document.getElementById('bin2').value = bin1.bit64;
 
   var operation = {
     add: function(num1,num2){
@@ -104,16 +102,29 @@ function evaluate(num1,num2,operator) {
   };
 
   var answer = operation[operator]();
-  document.getElementById('resultBin').value = answer.bit64;
   return answer.value;
 }
 
 function calculate(){
-  let x = document.getElementById('num1').value;
-  let y = document.getElementById('num2').value;
-  // Later add code to get the operator (For now addition)
-  let operator = document.getElementById('operator').value;
-  var result = evaluate(x,y,operator)
+  var count = parseInt(document.getElementById('count').innerHTML);
+  var numbers = [];
+  var operators = [];
+  for (var i = 1; i <= count; i++) {
+    numbers.push(document.getElementById('num'+i).value);
+  }
+  for (var i = 1; i < count; i++) {
+    var op = document.getElementById('operator'+i).value;
+    op.toString();
+    operators.push(op);
+  }
+
+  var result = numbers[0];
+  for (var i = 1; i < count; i++) {
+    console.log(result);
+    console.log(numbers[i]);
+    result = evaluate(result,numbers[i],operators[i-1]);
+    console.log(result);
+  }
   document.getElementById('result').value = result;
 }
 

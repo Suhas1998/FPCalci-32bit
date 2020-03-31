@@ -10,23 +10,27 @@
       const fieldsdiv = document.getElementById("fields");
       addField.addEventListener("click", function(){
         count++;
+        document.getElementById('count').innerHTML = count;
         const newField = document.createElement('span');
         newField.className = 'numberField';
         var select = document.createElement('select');
-        select.id = "operator" + count;
+        select.id = "operator" + (count-1);
         var option = document.createElement('option');
         option.value = "add";
         option.text = "Add";
         select.add(option);
+        var option = document.createElement('option');
         option.value = "subtract";
         option.text = "Subtract";
-        select.add(option);
+        select.appendChild(option);
+        var option = document.createElement('option');
         option.value = "multiply";
         option.text = "Multiply";
-        select.add(option);
+        select.appendChild(option);
+        var option = document.createElement('option');
         option.value = "divide";
         option.text = "Divide";
-        select.add(option);
+        select.appendChild(option);
         newField.appendChild(select);
         newField.appendChild(document.createElement('br'));
         var text = document.createTextNode('Number '+count+': ');
@@ -51,7 +55,7 @@
 <body>
   <div>
     <h2>Calculator</h2>
-    <button id="add">Add Field</button><br>
+    <span> Number of fields :</span><span id="count">2</span><button id="add">Add Field</button><br>
     <form>
       Number 1: <input type="number" name="num1" id="num1" onchange="toBinary(1)"></input> <input type="text" maxlength="64" id="bin1"/></input> <br>
       <div id="fields">
