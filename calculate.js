@@ -96,7 +96,7 @@ function evaluate(num1,num2,operator) {
           return roundBin(findBin(bin1.value-bin2.value));
     },
     multiply: function(num1,num2){
-          return roundBin(findBin(bin1.value*-bin2.value));
+          return roundBin(findBin(bin1.value*bin2.value));
     },
     divide: function(num1,num2){
           return roundBin(findBin(bin1.value/bin2.value));
