@@ -2,13 +2,10 @@
 0.125 : 0011111111000000000000000000000000000000000000000000000000000000
 0.2   : 0011111111001001100110011001100110011001100110011001100110011010  */
 
-// This is bit wise representation of Floating point number.
-
 var mantissaBits = 23;
 var possibleMantissas = Math.pow(2, mantissaBits);
 
 function findBin(number){
-  // Before Rounding
   var float = new Float64Array([number]);
   var bytes = new Uint8Array(float.buffer);
   var bit64 = [].map.call(bytes, function(b){
@@ -21,18 +18,21 @@ function findBin(number){
   bit64 = bit64.join("");
 
   var sign = bytes[7]>>7;
+  // This is just adding the last 7 of bytes[7] and first 4 of bytes[6] to get 11 bit exponent of 64bit version
   var exponent = ((bytes[7] & 0x7f) << 4 | bytes[6] >> 4) - 0x3ff;
+  // Basically the below steps are to divide the mantissa with 2^exponent So that the resultant float value (float[0]) in buffer becomes the mantissa where: Actual float = sign*2^exp*mantissa
   bytes[7] = 0x3f;
   bytes[6] |= 0xf0;
   var mantissa = float[0];
   var value = (sign ? -1 : 1) * Math.pow(2,exponent) * mantissa;
   // Later add 32 bit string as well
+  // The below calculated
   return {
+    value: value,
     sign: sign,
     exponent: exponent,
     mantissa: mantissa,
-    bit64: bit64,
-    value: value
+    bit64: bit64
   };
 }
 

@@ -3,24 +3,72 @@
 <head>
   <title>Floating Point numbers calculator</title>
   <script src="calculate.js"></script>
+  <script >
+    window.onload=function(){
+      const addField = document.getElementById("add");
+      var count = 2;
+      const fieldsdiv = document.getElementById("fields");
+      addField.addEventListener("click", function(){
+        count++;
+        const newField = document.createElement('span');
+        newField.className = 'numberField';
+        var select = document.createElement('select');
+        select.id = "operator" + count;
+        var option = document.createElement('option');
+        option.value = "add";
+        option.text = "Add";
+        select.add(option);
+        option.value = "subtract";
+        option.text = "Subtract";
+        select.add(option);
+        option.value = "multiply";
+        option.text = "Multiply";
+        select.add(option);
+        option.value = "divide";
+        option.text = "Divide";
+        select.add(option);
+        newField.appendChild(select);
+        newField.appendChild(document.createElement('br'));
+        var text = document.createTextNode('Number '+count+': ');
+        newField.appendChild(text);
+        var inp1 = document.createElement('input');
+        inp1.type = "number";
+        inp1.name = "num"+count;
+        inp1.id = "num"+count;
+        newField.appendChild(inp1);
+        var inp2 = document.createElement('input');
+        inp2.type = "text";
+        inp2.maxlength = "64";
+        inp2.id = "bin"+count;
+        newField.appendChild(inp2);
+        newField.appendChild(document.createElement('br'));
+        fieldsdiv.appendChild(newField);
+      });
+    }
+
+  </script>
 </head>
 <body>
   <div>
     <h2>Calculator</h2>
+    <button id="add">Add Field</button><br>
     <form>
-      1st Number : <input type="number" name="num1" id="num1"></input> <input type="text" maxlength="64" id="bin1"/></input> <br>
-      <input type="button" value="Convert to Binary" onclick="toBinary()" /></input><br>
-      2nd Number : <input type="number" name="num2" id="num2"></input> <input type="text" maxlength="64" id="bin2"/></input> <br>
-      <input type="button" value="Convert to Decimal" onclick="toDecimal()" /></input><br>
+      Number 1: <input type="number" name="num1" id="num1"></input> <input type="text" maxlength="64" id="bin1"/></input> <br>
+      <div id="fields">
+        <span class="numberField">
+          <select id="operator1">
+            <option value="add">Add</option>
+            <option value="subtract">Subtract</option>
+            <option value="multiply">Multiply</option>
+            <option value="divide">Divide</option>
+          </select><br>
+          Number 2: <input type="number" name="num2" id="num2"></input> <input type="text" maxlength="64" id="bin2"/></input> <br>
+        </span>
+      </div>
+      <input type="button" value="Calculate" onclick="calculate()" /></input><br>
       Result : <input type="number" name="result" id="result"></input> <input type="text" maxlength="64" id="resultBin"/></input> <br>
-      <select id="operator">
-        <option value="add">Add</option>
-        <option value="subtract">Subtract</option>
-        <option value="multiply">Multiply</option>
-        <option value="divide">Divide</option>
-      </select>
-      <input type="button" value="Calculate" onclick="calculate()" /></input>
     </form>
+
   </div>
 </body>
 </html>
