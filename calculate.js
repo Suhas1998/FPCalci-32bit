@@ -26,13 +26,19 @@ function findBin(number){
   var mantissa = float[0];
   var value = (sign ? -1 : 1) * Math.pow(2,exponent) * mantissa;
   // Later add 32 bit string as well
+  var temp = "00000000";
+
+  var bit32 = exponent + 0x7F ;
+  bit32 = sign + temp.slice(0,8-(bit32.toString(2).length)) + (exponent + 0x7F).toString(2) + bit64.slice(12,35);
+
   // The below calculated
   return {
     value: value,
     sign: sign,
     exponent: exponent,
     mantissa: mantissa,
-    bit64: bit64
+    bit64: bit64,
+    bit32: bit32
   };
 }
 
@@ -69,7 +75,8 @@ function toBinary(num){
   // Evaluate the result
   var result = roundBin(findBin(x));
   // Write the values as output
-  document.getElementById('bin'+num).value = result.value;
+  document.getElementById('bin'+num).value = result.bit32;
+  console.log(result.bit32);
 }
 
 function toDecimal(){
@@ -130,4 +137,10 @@ function calculate(){
 
 /* References:
 https://www.cs.uaf.edu/2000/fall/cs301/notes/notes/node51.html
+*/
+
+// Existing Issues
+/* 1. Boundaries of subnormal numbers not checked.
+   2. Didnt check for large numbers.
+   3. Problem with the representation of 0
 */
