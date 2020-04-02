@@ -6,7 +6,8 @@
   <script >
     window.onload=function(){
       const addField = document.getElementById("add");
-      var count = 2;
+      const removeField = document.getElementById("remove");
+      var count = 1;
       const fieldsdiv = document.getElementById("fields");
       addField.addEventListener("click", function(){
         count++;
@@ -49,26 +50,25 @@
         newField.appendChild(document.createElement('br'));
         fieldsdiv.appendChild(newField);
       });
+      removeField.addEventListener("click", function(){
+        if (count>1) {
+          count--;
+          document.getElementById('count').innerHTML = count;
+          fieldsdiv.removeChild(fieldsdiv.childNodes[count-1]);
+        }else{
+          console.log("Cant remove the only field");
+        }
+      })
     }
   </script>
 </head>
 <body>
   <div>
     <h2>Calculator</h2>
-    <span> Number of fields :</span><span id="count">2</span><button id="add">Add Field</button><br>
+    <span> Number of fields :</span><span id="count">1</span><button id="add">Add Field</button><button id="remove">Remove Field</button><br>
     <form>
       Number 1: <input type="number" name="num1" id="num1" onchange="toBinary(1)"></input> <input type="text" maxlength="64" id="bin1"/></input> <br>
-      <div id="fields">
-        <span class="numberField">
-          <select id="operator1">
-            <option value="add">Add</option>
-            <option value="subtract">Subtract</option>
-            <option value="multiply">Multiply</option>
-            <option value="divide">Divide</option>
-          </select><br>
-          Number 2: <input type="number" name="num2" id="num2" onchange="toBinary(2)"></input> <input type="text" maxlength="64" id="bin2"/></input> <br>
-        </span>
-      </div>
+      <div id="fields"></div>
       <input type="button" value="Calculate" onclick="calculate()" /></input><br>
       Result : <input type="number" name="result" id="result"></input> <input type="text" maxlength="64" id="resultBin"/></input> <br>
     </form>
