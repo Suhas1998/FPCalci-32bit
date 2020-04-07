@@ -19,6 +19,10 @@ section{
   margin-right: auto;
   margin-left: auto; }
 
+.main-heading{
+  font-size: 3rem !important;
+  font-weight: bolder !important;
+}
 
 .container-fluid {
   width: 100%;
