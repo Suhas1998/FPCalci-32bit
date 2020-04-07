@@ -134,7 +134,8 @@ function calculate(){
     result = evaluate(result,numbers[i],operators[i-1]);
     console.log(result);
   }
-  document.getElementById('result').value = result;
+  document.getElementById('num0').value = result;
+  toBinary(0);
 }
 
 /* References:

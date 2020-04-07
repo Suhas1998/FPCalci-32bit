@@ -23,7 +23,17 @@
   <link rel="stylesheet" href="css/style2.css">
   <script src="calculate.js"></script>
   <script >
+    function clearInputs(){
+      var inputs = document.getElementsByTagName('input');
+      for(var i=0;i<inputs.length;i++){
+        if(inputs[i].type.toLowerCase() == 'text' || inputs[i].type.toLowerCase() == 'number') {
+          inputs[i].value = "";
+        }
+      }
+    }
+
     window.onload=function(){
+      clearInputs();
       const addField = document.getElementById("add");
       const removeField = document.getElementById("remove");
       var count = 1;
@@ -128,14 +138,12 @@
         Menu
       </button>
       <div class="order-lg-last">
-        <a href="#" class="btn btn-primary">Make</a>
+        <a href="https://github.com/Suhas1998/FPCalci-32bit" class="btn btn-primary">Github Repository</a>
       </div>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Page2</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Page3</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Page4</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Calculator</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">How it Works</a></li>
         </ul>
       </div>
     </div>
@@ -151,12 +159,12 @@
       <div class="row2 justify-content-center">
         <div class="col-md-12 view-section">
           <div class="wrap-appointment d-md-flex">
-            <div class="col-md-12 bg-primary p-5">
-              <span> Number of fields :</span><span id="count">1</span><button id="add">Add Field</button><button id="remove">Remove Field</button><br>
+            <div class="col-md-12 bg-primary p-5 ">
+              <span class="countField"><span> Number of fields :</span><i class="fa fa-minus-circle" id="remove"></i><span id="count" class="countField">1</span><i class="fa fa-plus-circle" id="add"></i></span>
               <form class="appointment">
                 <div class="row2 heading-section heading-section-white" id="fields">
                   <h2 class="mb-4 col-md-3 ">Decimal Number</h2>
-                  <h2 class="mb-4 col-md-5">32Bit Binary Representation</h2>
+                  <h2 class="mb-4 col-md-5">32-Bit Binary Representation</h2>
                   <h2 class="mb-4 col-md-4">Float Value Stored</h2>
                   <div class="col-md-3 form-group decimalDiv">
                     <input type="number" id="num1" class="form-control" placeholder="Decimal Number 1" onchange="toBinary(1)"></input>
@@ -170,6 +178,11 @@
                     <input type="text" id="float1" class="form-control" placeholder="Float stored 1">
                   </div>
                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <input type="submit" value="Calculate" class="btn btn-secondary py-3 px-4" onclick="calculate()">
+                      </div>
+                    </div>
               </form>
             </div>
           </div>
@@ -180,15 +193,15 @@
                 <div class="row2 heading-section heading-section-white" id="fields">
                   <h2 class="mb-4 col-md-12 ">Result</h2>
                   <div class="col-md-3 form-group decimalDiv">
-                    <input type="number" id="resultNum" class="form-control"  onchange="toBinary(1)"></input>
+                    <input type="number" id="num0" class="form-control"  onchange="toBinary(0)"></input>
                   </div>
                   <div class="col-md-5 form-group bitDiv d-md-flex ">
-                    <input type="text" maxlength="1" id="resultBinSign" class="col-md-1 form-control bin-margin" >
-                    <input type="text" maxlength="8" id="resultBinExp" class="col-md-3  form-control bin-margin" >
-                    <input type="text" maxlength="23" id="resultBinMan" class="col-md-7 form-control"  >
+                    <input type="text" maxlength="1" id="binSign0" class="col-md-1 form-control bin-margin" >
+                    <input type="text" maxlength="8" id="binExp0" class="col-md-3  form-control bin-margin" >
+                    <input type="text" maxlength="23" id="binMan0" class="col-md-7 form-control"  >
                   </div>
                   <div class="col-md-4 form-group floatDiv">
-                    <input type="text" id="resultFloat" class="form-control" >
+                    <input type="text" id="float0" class="form-control" >
                   </div>
                 </div>
 
@@ -199,6 +212,59 @@
     </div>
   </section>
 
+  <section class="ftco-section">
+      <div class="container">
+        <div class="row2 justify-content-center pb-5 mb-3">
+          <div class="col-md-12 view-section">
+            <div class=" heading-section text-center">
+              <span class="subheading">Floating Point Arithmetic</span>
+              <h2>How it works on 32-Bits</h2>
+              <p>ThishdisafiodvjabjvcabjvbavbasvFar far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.basvasvadvavdadv</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <footer class="footer ftco-section ftco-no-pt">
+      <div class="container">
+        <div class="row2 mb-5 d-md-flex justify-content-center">
+          <div class="col-md-12 view-section">
+            <div class="row2">
+              <div class="col-md-10 ">
+                <div class="ftco-footer-widget py-4 py-md-5">
+                  <h2 class="logo"><a href="#">References</a></h2>
+                  <p>These are the references</p>
+                </div>
+              </div>
+              <a href="#" class="col-md-2 bg-primary heading-section heading-section-white">
+                <h2 class="text-center pt-4">Fork Me On Github</h2>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- <div class="col-md-8 col-lg">
+            <div class="ftco-footer-widget py-4 py-md-5">
+              <h2 class="logo">References</h2>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg">
+            <div class="ftco-footer-widget bg-primary p-4 py-5">
+              <h2 class="ftco-heading-2">Fork on Github</h2>
+            </div>
+          </div> -->
   <!-- <div>
     <h2>Calculator</h2>
     <span> Number of fields :</span><span id="count">1</span><button id="add">Add Field</button><button id="remove">Remove Field</button><br>

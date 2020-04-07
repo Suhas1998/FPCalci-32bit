@@ -153,6 +153,25 @@ textarea.form-control {
 .bin-margin{
   margin-right: 4.167%;
 }
+
+.countField {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.countField> i{
+  color: #0147d2;
+  padding-right: 4px;
+  padding-left: 4px;
+
+}
+
+
+
+
 /*Chrome*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
