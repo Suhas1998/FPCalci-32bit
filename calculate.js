@@ -75,7 +75,9 @@ function toBinary(num){
   // Evaluate the result
   var result = roundBin(findBin(x));
   // Write the values as output
-  document.getElementById('bin'+num).value = result.bit32;
+  document.getElementById('binSign'+num).value = result.bit32.slice(0,1);
+  document.getElementById('binExp'+num).value = result.bit32.slice(1,9);
+  document.getElementById('binMan'+num).value = result.bit32.slice(9,32);
   console.log(result.bit32);
 }
 
