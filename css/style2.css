@@ -173,17 +173,10 @@ textarea.form-control {
 
 }
 
-@media (max-width: 1050px){
+@media (max-width: 1250px) and (min-width: 750px) {
   .bitDiv{
     display: none !important  ;
   }
-  .floatDiv{
-    width: 50px !important ;
-    max-width: 100% !important;
-  }
-
-
-
 }
 
 /*Chrome*/

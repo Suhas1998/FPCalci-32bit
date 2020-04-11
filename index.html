@@ -36,7 +36,7 @@
       var decDiv = document.getElementsByClassName('decimalDiv');
       var floatDiv = document.getElementsByClassName('floatDiv');
       console.log("Change1");
-      if (x.matches) { // If media query matches
+      if (x.matches ) { // If media query matches
         decDiv[0].className = "col-md-6 form-group decimalDiv";
         floatDiv[0].className = "col-md-6 form-group floatDiv d-md-flex";
         for(var i=1;i<decDiv.length;i++){
@@ -60,7 +60,7 @@
 
     window.onload=function(){
       clearInputs();
-      var x = window.matchMedia("(max-width: 1050px)");
+      var x = window.matchMedia("(max-width: 1250px ) and (min-width: 750px )");
       windowSizeing(x); // Call listener function at run time
       x.addListener(windowSizeing);
       const addField = document.getElementById("add");
