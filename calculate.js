@@ -5,6 +5,18 @@
 var mantissaBits = 23;
 var possibleMantissas = Math.pow(2, mantissaBits);
 
+function superScript(elem){
+  var chars = '+-=()0123456789AaÆᴂɐɑɒBbcɕDdðEeƎəɛɜɜfGgɡɣhHɦIiɪɨᵻɩjJʝɟKklLʟᶅɭMmɱNnɴɲɳŋOoɔᴖᴗɵȢPpɸrRɹɻʁsʂʃTtƫUuᴜᴝʉɥɯɰʊvVʋʌwWxyzʐʑʒꝯᴥβγδθφχнნʕⵡ',
+          sup   = '⁺⁻⁼⁽⁾⁰¹²³⁴⁵⁶⁷⁸⁹ᴬᵃÆᴂɐɑɒᴮᵇᶜɕᴰᵈðᴱᵉƎəɛɜɜᶠᴳᵍɡɣʰᴴɦᴵᶦɪɨᵻɩʲᴶʝɟᴷᵏˡᴸʟᶅɭᴹᵐɱᴺⁿɴɲɳŋᴼᵒɔᴖᴗɵȢᴾᵖɸʳᴿɹɻʁˢʂʃᵀᵗƫᵁᵘᴜᴝʉɥɯɰʊᵛⱽʋʌʷᵂˣʸᶻʐʑʒꝯᴥβγδθφχнნʕⵡ';
+  var result = '';
+  console.log(elem);
+  for(var i=0; i<elem.length;i++){
+    result += sup[chars.indexOf(elem[i])];
+  }
+  console.log(result);
+  return result;
+}
+
 function findBin(number){
   var float = new Float64Array([number]);
   var bytes = new Uint8Array(float.buffer);
@@ -78,7 +90,12 @@ function toBinary(num){
   document.getElementById('binSign'+num).value = result.bit32.slice(0,1);
   document.getElementById('binExp'+num).value = result.bit32.slice(1,9);
   document.getElementById('binMan'+num).value = result.bit32.slice(9,32);
-  console.log(result.bit32);
+  var floatNumber = "(-1)"+superScript(result.sign.toString())+" × "+"(2)"+superScript(result.exponent.toString())+" × "+result.mantissa+" =";
+
+  document.getElementById('float1'+num).value = floatNumber;
+  document.getElementById('float2'+num).value = result.value;
+  console.log(floatNumber);
+
 }
 
 function toDecimal(){

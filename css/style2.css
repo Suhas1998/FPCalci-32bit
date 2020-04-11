@@ -173,8 +173,18 @@ textarea.form-control {
 
 }
 
+@media (max-width: 1050px){
+  .bitDiv{
+    display: none !important  ;
+  }
+  .floatDiv{
+    width: 50px !important ;
+    max-width: 100% !important;
+  }
 
 
+
+}
 
 /*Chrome*/
 input::-webkit-outer-spin-button,

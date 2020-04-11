@@ -32,8 +32,37 @@
       }
     }
 
+    function windowSizeing(x) {
+      var decDiv = document.getElementsByClassName('decimalDiv');
+      var floatDiv = document.getElementsByClassName('floatDiv');
+      console.log("Change1");
+      if (x.matches) { // If media query matches
+        decDiv[0].className = "col-md-6 form-group decimalDiv";
+        floatDiv[0].className = "col-md-6 form-group floatDiv d-md-flex";
+        for(var i=1;i<decDiv.length;i++){
+          decDiv[i].className = "col-md-6 form-group decimalDiv";
+          floatDiv[i].className = "col-md-6 form-group floatDiv d-md-flex";
+          document.getElementById("float1" + (i-1).toString()).style.display = "none";
+          document.getElementById("float2" + (i-1).toString()).className = "form-control col-md-12";
+        }
+      } else {
+        decDiv[0].className = "col-md-3 form-group decimalDiv";
+        floatDiv[0].className = "col-md-5 form-group floatDiv d-md-flex";
+        for(var i=1;i<decDiv.length;i++){
+          decDiv[i].className = "col-md-3 form-group decimalDiv";
+          floatDiv[i].className = "col-md-5 form-group floatDiv d-md-flex";
+
+          document.getElementById("float1" + (i-1).toString()).style.display = "inline-block";
+          document.getElementById("float2" + (i-1).toString()).className = "form-control col-md-5";
+        }
+      }
+    }
+
     window.onload=function(){
       clearInputs();
+      var x = window.matchMedia("(max-width: 1050px)");
+      windowSizeing(x); // Call listener function at run time
+      x.addListener(windowSizeing);
       const addField = document.getElementById("add");
       const removeField = document.getElementById("remove");
       var count = 1;
@@ -75,12 +104,12 @@
           decNumber.appendChild(inp1);
           fieldsdiv.appendChild(decNumber);
           var binNumber = document.createElement('div');
-          binNumber.className = "col-md-5 form-group bitDiv d-md-flex";
+          binNumber.className = "col-md-4 form-group bitDiv d-md-flex";
           var inpSign = document.createElement('input');
           inpSign.type = "text";
           inpSign.setAttribute("maxlength", "1");
           inpSign.id = "binSign"+count;
-          inpSign.className = "col-md-1 form-control bin-margin";
+          inpSign.className = "col-md-1 form-control";
           inpSign.placeholder = "S";
           // inpSign.setAttribute("onchange", "toBinary("+count+")")
           binNumber.appendChild(inpSign);
@@ -88,7 +117,7 @@
           inpExp.type = "text";
           inpExp.setAttribute("maxlength", "8");
           inpExp.id = "binExp"+count;
-          inpExp.className = "col-md-3 form-control bin-margin";
+          inpExp.className = "col-md-3 form-control";
           inpExp.placeholder = "Exponent";
           // inpExp.setAttribute("onchange", "toBinary("+count+")")
           binNumber.appendChild(inpExp);
@@ -96,24 +125,32 @@
           inpMan.type = "text";
           inpMan.setAttribute("maxlength", "23");
           inpMan.id = "binMan"+count;
-          inpMan.className = "col-md-7 form-control";
+          inpMan.className = "col-md-8 form-control";
           inpMan.placeholder = "Mantissa";
           // inpMan.setAttribute("onchange", "toBinary("+count+")")
           binNumber.appendChild(inpMan);
           fieldsdiv.appendChild(binNumber);
           var floatNumber = document.createElement('div');
-          floatNumber.className = "col-md-4 form-group floatDiv";
-          var inp3 = document.createElement('input');
-          inp3.type = "text";
-          inp3.id = "float"+count;
-          inp3.className = "form-control";
-          inp3.placeholder = "Float Stored "+count;
-          // inp1.setAttribute("onchange", "toBinary("+count+")")
-          floatNumber.appendChild(inp3);
+          floatNumber.className = "col-md-5 form-group floatDiv d-md-flex";
+          var inpf1 = document.createElement('input');
+          inpf1.type = "text";
+          inpf1.id = "float1"+count;
+          inpf1.className = "form-control col-md-7";
+          inpf1.placeholder = "Float in scientific format "+count;
+          // inpf1.setAttribute("onchange", "toBinary("+count+")")
+          floatNumber.appendChild(inpf1);
+          var inpf2 = document.createElement('input');
+          inpf2.type = "text";
+          inpf2.id = "float2"+count;
+          inpf2.className = "form-control col-md-5";
+          inpf2.placeholder = "Float value stored "+count;
+          // inpf2.setAttribute("onchange", "toBinary("+count+")")
+          floatNumber.appendChild(inpf2);
           fieldsdiv.appendChild(floatNumber);
         }else{
           console.log("Dude!! Why do you want to add more???");
         }
+        windowSizeing(x);
       });
       removeField.addEventListener("click", function(){
         if (count>1) {
@@ -126,6 +163,7 @@
         }else{
           console.log("Cant remove the only field");
         }
+        windowSizeing(x);
       })
     }
   </script>
@@ -175,48 +213,45 @@
               <span class="countField"><span> Number of fields :</span><i class="fa fa-minus-circle fa-lg" id="remove"></i><span id="count" class="countField">1</span><i class="fa fa-plus-circle fa-lg" id="add"></i></span>
               <form class="appointment">
                 <div class="row2 heading-section heading-section-white" id="fields">
-                  <h2 class="mb-4 col-md-3 ">Decimal Number</h2>
-                  <h2 class="mb-4 col-md-5">32-Bit Binary Representation</h2>
-                  <h2 class="mb-4 col-md-4">Float Value Stored</h2>
+                  <h2 class="mb-4 decimalDiv col-md-3 ">Decimal Number</h2>
+                  <h2 class="mb-4 bitDiv col-md-4">32-Bit Binary Representation</h2>
+                  <h2 class="mb-4 floatDiv col-md-5">Float Value Stored</h2>
                   <div class="col-md-3 form-group decimalDiv">
                     <input type="number" id="num1" class="form-control" placeholder="Decimal Number 1" onchange="toBinary(1)"></input>
                   </div>
-                  <div class="col-md-5 form-group bitDiv d-md-flex">
-                    <input type="text" maxlength="1" id="binSign1" class="col-md-1  form-control bin-margin" placeholder="S" >
-                    <input type="text" maxlength="8" id="binExp1" class="col-md-3  form-control bin-margin" placeholder="Exponent" >
-                    <input type="text" maxlength="23" id="binMan1" class="col-md-7  form-control" placeholder="Mantissa">
+                  <div class="col-md-4 form-group bitDiv d-md-flex">
+                    <input type="text" maxlength="1" id="binSign1" class="col-md-1  form-control" placeholder="S" >
+                    <input type="text" maxlength="8" id="binExp1" class="col-md-3  form-control" placeholder="Exponent" >
+                    <input type="text" maxlength="23" id="binMan1" class="col-md-8  form-control" placeholder="Mantissa">
                   </div>
-                  <div class="col-md-4 form-group floatDiv">
-                    <input type="text" id="float1" class="form-control" placeholder="Float stored 1">
+                  <div class="col-md-5 form-group d-md-flex floatDiv">
+                    <input type="text" id="float11" class="form-control col-md-7" placeholder="Float in scientific format">
+                    <input type="text" id="float21" class="form-control col-md-5" placeholder="Float value stored 1">
                   </div>
                 </div>
                 <div class="col-md-12">
-                      <div class="form-group">
-                        <input type="submit" value="Calculate" class="btn btn-secondary py-3 px-4" onclick="calculate()">
-                      </div>
-                    </div>
+                  <div class="form-group">
+                    <input type="submit" value="Calculate" class="btn btn-secondary py-3 px-4" onclick="calculate()">
+                  </div>
+                </div>
               </form>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12 view-section">
-          <div class=" d-md-flex">
-            <div class="col-md-12 bg-primary p-5">
-                <div class="row2 heading-section heading-section-white" id="fields">
+              <div class="appointment">
+                <div class="row2 heading-section heading-section-white">
                   <h2 class="mb-4 col-md-12 ">Result</h2>
+
                   <div class="col-md-3 form-group decimalDiv">
                     <input type="number" id="num0" class="form-control"  onchange="toBinary(0)"></input>
                   </div>
-                  <div class="col-md-5 form-group bitDiv d-md-flex ">
-                    <input type="text" maxlength="1" id="binSign0" class="col-md-1 form-control bin-margin" >
-                    <input type="text" maxlength="8" id="binExp0" class="col-md-3  form-control bin-margin" >
-                    <input type="text" maxlength="23" id="binMan0" class="col-md-7 form-control"  >
+                  <div class="col-md-4 form-group bitDiv d-md-flex ">
+                    <input type="text" maxlength="1" id="binSign0" class="col-md-1 form-control" >
+                    <input type="text" maxlength="8" id="binExp0" class="col-md-3  form-control" >
+                    <input type="text" maxlength="23" id="binMan0" class="col-md-8 form-control"  >
                   </div>
-                  <div class="col-md-4 form-group floatDiv">
-                    <input type="text" id="float0" class="form-control" >
+                  <div class="col-md-5 form-group floatDiv d-md-flex">
+                    <input type="text" id="float10" class="form-control col-md-7" >
+                    <input type="text" id="float20" class="form-control col-md-5" >
                   </div>
-                </div>
-
+              </div>
             </div>
           </div>
         </div>
