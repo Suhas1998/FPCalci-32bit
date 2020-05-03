@@ -35,6 +35,10 @@ section{
   max-width: 85%;
 }
 
+.view-section2 {
+  max-width: 65%;
+}
+
 .form-control {
   display: block;
   width: 100%;
